@@ -14,7 +14,11 @@ export const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main" screenOptions={screenOptions}>
         <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Post" component={PostScreen} options={postOptions}/>
+        <Stack.Screen
+          name="Post"
+          component={PostScreen}
+          options={postOptions}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -30,12 +34,18 @@ const screenOptions = {
   }
 };
 
-const postOptions = {
-  headerStyle: {
-    backgroundColor: '#faac1b'
-  },
-  headerTintColor: '#fff',
-  headerTitleStyle: {
-    fontFamily: "nunito-bold"
-  }
-}
+const postOptions = ({ route }) => {
+  const postId = route.params.postId;
+  const date = route.params.date
+
+  return {
+    title: date,
+    headerStyle: {
+      backgroundColor: "#faac1b"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontFamily: "nunito-bold"
+    }
+  };
+};
