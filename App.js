@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { AppLoading } from "expo";
+
 import {bootstrap} from './src/bootstrap'
 import { AppNavigation } from "./src/AppNavigation";
 
@@ -21,15 +21,3 @@ export default function App() {
     <AppNavigation/>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  text: {
-    fontFamily: 'nunito-bold'
-  }
-});

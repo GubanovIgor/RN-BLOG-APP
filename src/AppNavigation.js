@@ -14,7 +14,7 @@ export const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main" screenOptions={screenOptions}>
         <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Post" component={PostScreen} />
+        <Stack.Screen name="Post" component={PostScreen} options={postOptions}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -29,3 +29,13 @@ const screenOptions = {
     fontFamily: "nunito-bold"
   }
 };
+
+const postOptions = {
+  headerStyle: {
+    backgroundColor: '#faac1b'
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontFamily: "nunito-bold"
+  }
+}
