@@ -8,7 +8,8 @@ export const MainScreen = ({ navigation }) => {
   const openPostHandler = post => {
     navigation.navigate("Post", {
       postId: post.id,
-      date: new Date(post.date).toLocaleDateString()
+      date: new Date(post.date).toLocaleDateString(),
+      booked: post.booked
     });
   };
 
