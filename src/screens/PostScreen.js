@@ -1,20 +1,53 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Button,
+  Alert
+} from "react-native";
 
-export const PostScreen = ({ navigation, route }) => {
-  const postId = route.params.postId
+import { THEME } from "../theme";
+import { DATA } from "../../assets/data";
+
+export const PostScreen = ({ route }) => {
+  const postId = route.params.postId;
+  const post = DATA.find(p => p.id === postId);
+
+  const removeHandler = () => {
+    Alert.alert(
+      'Удаление поста',
+      'Вы уверены?',
+      [
+        {
+          text: 'Отменить',
+          style: 'cancel',
+        },
+        {text: 'Удалить', style: 'destructive', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
+  }
 
   return (
-    <View style={styles.center}>
-      <Text>{postId}</Text>
-    </View>
+    <ScrollView>
+      <Image style={styles.image} source={{ uri: post.img }} />
+      <View>
+        <Text>{post.text}</Text>
+      </View>
+      <Button title="Удалить" style={styles.button} onPress={removeHandler}/>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+  image: {
+    width: "100%",
+    height: 200
+  },
+  button: {
+    backgroundColor: THEME.DANGER_COLOR
   }
 });

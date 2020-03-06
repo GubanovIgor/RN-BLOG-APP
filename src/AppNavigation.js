@@ -35,7 +35,6 @@ const screenOptions = {
 };
 
 const postOptions = ({ route }) => {
-  const postId = route.params.postId;
   const date = route.params.date
 
   return {
