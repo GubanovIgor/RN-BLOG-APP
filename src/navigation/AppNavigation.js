@@ -11,24 +11,23 @@ import { BookScreen } from "../screens/BookScreen";
 import { THEME } from "../theme";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 
-const Tab = createBottomTabNavigator();
-
-export const BottomNavigation = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Main" component={MainScreen}/>
-      <Tab.Screen name="Book" component={BookScreen} />
-    </Tab.Navigator>
-  );
-};
+import TabBarIcon from "../components/TabBarIcon";
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomNavigation" screenOptions={defaultOptions}>
-        <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={mainScreenOptions}/>
+      <Stack.Navigator
+        initialRouteName="BottomNavigation"
+        screenOptions={defaultOptions}
+      >
+        <Stack.Screen
+          name="BottomNavigation"
+          component={BottomNavigation}
+          options={mainScreenOptions}
+        />
         <Stack.Screen
           name="Post"
           component={PostScreen}
@@ -36,6 +35,23 @@ export const AppNavigation = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+  );
+};
+
+export const BottomNavigation = () => {
+  return (
+    <Tab.Navigator tabBarOptions={tabBarOptions}>
+      <Tab.Screen
+        name="Main"
+        component={MainScreen}
+        options={bottomMainScreenOptions}
+      />
+      <Tab.Screen
+        name="Book"
+        component={BookScreen}
+        options={bottomBookScreenOptions}
+      />
+    </Tab.Navigator>
   );
 };
 
@@ -49,6 +65,13 @@ const defaultOptions = {
     fontFamily: "nunito-bold"
   }
 };
+
+const tabBarOptions = {
+  activeTintColor: THEME.MAIN_COLOR,
+  labelStyle: {
+    fontSize: 0
+  }
+}
 
 const postScreenOptions = ({ route }) => {
   const date = route.params.date;
@@ -77,7 +100,7 @@ const postScreenOptions = ({ route }) => {
 
 const mainScreenOptions = () => {
   return {
-    title: 'Лента',
+    title: "Лента",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
         <Item
@@ -91,6 +114,29 @@ const mainScreenOptions = () => {
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
         <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
       </HeaderButtons>
+    )
+  };
+};
+
+const bottomMainScreenOptions = () => {
+  return {
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name="home"
+      />
+    )
+  };
+};
+
+const bottomBookScreenOptions = () => {
+  return {
+    activeTintColor: "red",
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name="staro"
+      />
     )
   };
 };
