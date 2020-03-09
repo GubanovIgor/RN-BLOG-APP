@@ -1,10 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { PostScreen } from "../screens/PostScreen";
 import { BookScreen } from "../screens/BookScreen";
-import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { THEME } from "../theme";
 
 const BookNavigator = createStackNavigator();
@@ -18,12 +16,12 @@ export const BookNavigation = () => {
       <BookNavigator.Screen
         name="Book"
         component={BookScreen}
-        options={mainScreenOptions}
+        options={BookScreen.navigationOptions}
       />
       <BookNavigator.Screen
         name="Post"
         component={PostScreen}
-        options={postScreenOptions}
+        options={PostScreen.navigationOptions}
       />
     </BookNavigator.Navigator>
   );
@@ -37,49 +35,4 @@ const defaultOptions = {
   headerTitleStyle: {
     fontFamily: "nunito-bold"
   }
-};
-
-const mainScreenOptions = () => {
-  return {
-    title: "Лента",
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item
-          title="stepforward"
-          iconName="camera"
-          onPress={() => console.log("hui")}
-        />
-      </HeaderButtons>
-    ),
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
-      </HeaderButtons>
-    )
-  };
-};
-
-const postScreenOptions = ({ route }) => {
-  const date = route.params.date;
-  const booked = route.params.booked;
-
-  return {
-    title: date,
-    headerStyle: {
-      backgroundColor: "#faac1b"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontFamily: "nunito-bold"
-    },
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item
-          title="star"
-          iconName={booked ? "star" : "staro"}
-          onPress={() => console.log("hui")}
-        />
-      </HeaderButtons>
-    )
-  };
 };

@@ -1,8 +1,10 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { Post } from "../components/Post";
 import { DATA } from "../../assets/data";
+import { AppHeaderIcon } from "../components/AppHeaderIcon";
 
 export const MainScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -29,3 +31,23 @@ export const MainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   wrapper: {}
 });
+
+MainScreen.navigationOptions = () => {
+  return {
+    title: "Лента",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+        <Item
+          title="stepforward"
+          iconName="camera"
+          onPress={() => console.log("hui")}
+        />
+      </HeaderButtons>
+    ),
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+        <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
+      </HeaderButtons>
+    )
+  };
+};

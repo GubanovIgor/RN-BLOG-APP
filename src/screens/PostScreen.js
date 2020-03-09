@@ -8,9 +8,11 @@ import {
   Button,
   Alert
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { THEME } from "../theme";
 import { DATA } from "../../assets/data";
+import { AppHeaderIcon } from "../components/AppHeaderIcon";
 
 export const PostScreen = ({ route }) => {
   const postId = route.params.postId;
@@ -51,3 +53,28 @@ const styles = StyleSheet.create({
     backgroundColor: THEME.DANGER_COLOR
   }
 });
+
+PostScreen.navigationOptions = ({ route }) => {
+  const date = route.params.date;
+  const booked = route.params.booked;
+
+  return {
+    title: date,
+    headerStyle: {
+      backgroundColor: "#faac1b"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontFamily: "nunito-bold"
+    },
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+        <Item
+          title="star"
+          iconName={booked ? "star" : "staro"}
+          onPress={() => console.log("hui")}
+        />
+      </HeaderButtons>
+    )
+  };
+};

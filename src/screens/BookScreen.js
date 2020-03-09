@@ -1,8 +1,10 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { Post } from "../components/Post";
 import { DATA } from "../../assets/data";
+import { AppHeaderIcon } from "../components/AppHeaderIcon";
 
 export const BookScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -31,3 +33,14 @@ export const BookScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   wrapper: {}
 });
+
+BookScreen.navigationOptions = () => {
+  return {
+    title: "Лента",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+        <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
+      </HeaderButtons>
+    )
+  };
+};

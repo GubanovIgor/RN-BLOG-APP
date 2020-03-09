@@ -40,7 +40,6 @@ const bottomMainScreenOptions = () => {
 
 const bottomBookScreenOptions = () => {
   return {
-    activeTintColor: "red",
     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="staro" />
   };
 };
