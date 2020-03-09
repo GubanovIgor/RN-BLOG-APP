@@ -8,7 +8,7 @@ export const TabBarIcon = props => {
     <AntDesign
       name={props.name}
       size={32}
-      color={props.focused ? THEME.MAIN_COLOR : "black"}
+      color={props.focused ? '#fff' : THEME.DARK_MAIN_COLOR}
       style={{ marginBottom: -3 }}
     />
   );

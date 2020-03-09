@@ -10,7 +10,7 @@ const BottomNavigator = createBottomTabNavigator();
 
 export const BottomNavigation = () => {
   return (
-    <BottomNavigator.Navigator tabBarOptions={tabBarOptions}>
+    <BottomNavigator.Navigator tabBarOptions={tabBarOptions} screenOptions={{backgroundColor: 'red'}}>
       <BottomNavigator.Screen
         name="PostNavigation"
         component={PostNavigation}
@@ -26,7 +26,9 @@ export const BottomNavigation = () => {
 };
 
 const tabBarOptions = {
-  activeTintColor: THEME.MAIN_COLOR,
+  style: {
+    backgroundColor: THEME.MAIN_COLOR
+  },
   labelStyle: {
     fontSize: 0
   }
