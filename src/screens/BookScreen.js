@@ -19,12 +19,12 @@ export const BookScreen = ({ navigation }) => {
   return <PostList data={data} onOpen={openPostHandler}/>
 };
 
-BookScreen.navigationOptions = () => {
+BookScreen.navigationOptions = ({navigation}) => {
   return {
     title: "Избранное",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
+        <Item title="bars" iconName="bars" onPress={() => navigation.toggleDrawer()} />
       </HeaderButtons>
     )
   };
