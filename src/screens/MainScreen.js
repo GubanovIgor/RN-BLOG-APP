@@ -25,7 +25,7 @@ MainScreen.navigationOptions = ({navigation}) => {
         <Item
           title="stepforward"
           iconName="camera"
-          onPress={() => console.log("hui")}
+          onPress={() => navigation.navigate("CreateScreen")}
         />
       </HeaderButtons>
     ),
