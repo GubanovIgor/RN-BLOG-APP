@@ -18,17 +18,23 @@ import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { bookedPost } from "../store/actions/post";
 
 export const PostScreen = ({ route, navigation }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const postId = route.params.postId;
   const post = DATA.find(p => p.id === postId);
 
   const bookedToggle = useCallback(() => {
-    dispatch(bookedPost(postId))
+    dispatch(bookedPost(postId));
   }, [dispatch, postId]);
 
   useEffect(() => {
-    navigation.setParams({bookedToggle})
-  }, [])
+    navigation.setParams({ bookedToggle });
+  }, []);
+
+  const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId))
+
+  useEffect(() => {
+    navigation.setParams({ booked });
+  }, [booked]);
 
   const removeHandler = () => {
     Alert.alert(
@@ -70,10 +76,10 @@ const styles = StyleSheet.create({
   }
 });
 
-PostScreen.navigationOptions = ({ route, navigation }) => {
+PostScreen.navigationOptions = ({ route }) => {
   const date = route.params.date;
   const booked = route.params.booked;
-  const bookedToggle = route.params.bookedToggle
+  const bookedToggle = route.params.bookedToggle;
 
   return {
     title: date,
