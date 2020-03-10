@@ -17,7 +17,7 @@ export const MainScreen = ({ navigation }) => {
   return <PostList data={DATA} onOpen={openPostHandler}/>
 };
 
-MainScreen.navigationOptions = () => {
+MainScreen.navigationOptions = ({navigation}) => {
   return {
     title: "Все посты",
     headerRight: () => (
@@ -31,7 +31,7 @@ MainScreen.navigationOptions = () => {
     ),
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-        <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />
+        <Item title="bars" iconName="bars" onPress={() => navigation.toggleDrawer()} />
       </HeaderButtons>
     )
   };
