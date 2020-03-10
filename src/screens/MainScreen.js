@@ -1,10 +1,9 @@
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import { Post } from "../components/Post";
 import { DATA } from "../../assets/data";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
+import { PostList } from "../components/PostList";
 
 export const MainScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -15,26 +14,12 @@ export const MainScreen = ({ navigation }) => {
     });
   };
 
-  return (
-    <View style={styles.wrapper}>
-      <FlatList
-        data={DATA}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <Post post={item} onOpen={() => openPostHandler(item)} />
-        )}
-      />
-    </View>
-  );
+  return <PostList data={DATA} onOpen={openPostHandler}/>
 };
-
-const styles = StyleSheet.create({
-  wrapper: {}
-});
 
 MainScreen.navigationOptions = () => {
   return {
-    title: "Лента",
+    title: "Все посты",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
         <Item

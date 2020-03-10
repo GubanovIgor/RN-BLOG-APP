@@ -3,16 +3,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { MainScreen } from "../screens/MainScreen";
 import { PostScreen } from "../screens/PostScreen";
-import { THEME } from "../theme";
+import { screenDefaultOptions } from "./navigationOptions/navigationOptions";
 
 const PostNavigator = createStackNavigator();
 
 export const PostNavigation = () => {
   return (
-    <PostNavigator.Navigator
-      initialRouteName="BottomNavigation"
-      screenOptions={defaultOptions}
-    >
+    <PostNavigator.Navigator screenOptions={screenDefaultOptions}>
       <PostNavigator.Screen
         name="Main"
         component={MainScreen}
@@ -25,14 +22,4 @@ export const PostNavigation = () => {
       />
     </PostNavigator.Navigator>
   );
-};
-
-const defaultOptions = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? THEME.MAIN_COLOR : "#fff"
-  },
-  headerTintColor: Platform.OS === "android" ? "#fff" : THEME.MAIN_COLOR,
-  headerTitleStyle: {
-    fontFamily: "nunito-bold"
-  }
 };

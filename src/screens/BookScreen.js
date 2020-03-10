@@ -1,10 +1,9 @@
 import React from "react";
-import { View, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import { Post } from "../components/Post";
 import { DATA } from "../../assets/data";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
+import { PostList } from "../components/PostList";
 
 export const BookScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -15,28 +14,14 @@ export const BookScreen = ({ navigation }) => {
     });
   };
 
-  return (
-    <View style={styles.wrapper}>
-      <FlatList
-        data={DATA}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => {
-          if (item.booked) {
-            return <Post post={item} onOpen={() => openPostHandler(item)} />;
-          }
-        }}
-      />
-    </View>
-  );
-};
+  const data = DATA.filter(post => post.booked)
 
-const styles = StyleSheet.create({
-  wrapper: {}
-});
+  return <PostList data={data} onOpen={openPostHandler}/>
+};
 
 BookScreen.navigationOptions = () => {
   return {
-    title: "Лента",
+    title: "Избранное",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
         <Item title="bars" iconName="bars" onPress={() => console.log("hui")} />

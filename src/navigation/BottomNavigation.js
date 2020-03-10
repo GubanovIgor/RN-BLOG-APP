@@ -10,7 +10,7 @@ const BottomNavigator = createBottomTabNavigator();
 
 export const BottomNavigation = () => {
   return (
-    <BottomNavigator.Navigator tabBarOptions={tabBarOptions} screenOptions={{backgroundColor: 'red'}}>
+    <BottomNavigator.Navigator tabBarOptions={tabBarOptions}>
       <BottomNavigator.Screen
         name="PostNavigation"
         component={PostNavigation}

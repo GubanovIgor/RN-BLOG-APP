@@ -27,7 +27,8 @@ export const Post = ({ post, onOpen }) => {
 const styles = StyleSheet.create({
   post: {
     marginBottom: 15,
-    overflow: "hidden"
+    overflow: "hidden",
+    borderRadius: 10
   },
   image: {
     width: "100%",
