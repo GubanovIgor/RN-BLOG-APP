@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   View,
   Image,
@@ -8,30 +8,46 @@ import {
   Button,
   Alert
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { THEME } from "../theme";
 import { DATA } from "../../assets/data";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
+import { bookedPost } from "../store/actions/post";
 
-export const PostScreen = ({ route }) => {
+export const PostScreen = ({ route, navigation }) => {
+  const dispatch = useDispatch()
   const postId = route.params.postId;
   const post = DATA.find(p => p.id === postId);
 
+  const bookedToggle = useCallback(() => {
+    dispatch(bookedPost(postId))
+  }, [dispatch, postId]);
+
+  useEffect(() => {
+    navigation.setParams({bookedToggle})
+  }, [])
+
   const removeHandler = () => {
     Alert.alert(
-      'Удаление поста',
-      'Вы уверены?',
+      "Удаление поста",
+      "Вы уверены?",
       [
         {
-          text: 'Отменить',
-          style: 'cancel',
+          text: "Отменить",
+          style: "cancel"
         },
-        {text: 'Удалить', style: 'destructive', onPress: () => console.log('OK Pressed')},
+        {
+          text: "Удалить",
+          style: "destructive",
+          onPress: () => console.log("OK Pressed")
+        }
       ],
-      {cancelable: false},
+      { cancelable: false }
     );
-  }
+  };
 
   return (
     <ScrollView>
@@ -39,7 +55,7 @@ export const PostScreen = ({ route }) => {
       <View>
         <Text>{post.text}</Text>
       </View>
-      <Button title="Удалить" style={styles.button} onPress={removeHandler}/>
+      <Button title="Удалить" style={styles.button} onPress={removeHandler} />
     </ScrollView>
   );
 };
@@ -54,9 +70,10 @@ const styles = StyleSheet.create({
   }
 });
 
-PostScreen.navigationOptions = ({ route }) => {
+PostScreen.navigationOptions = ({ route, navigation }) => {
   const date = route.params.date;
   const booked = route.params.booked;
+  const bookedToggle = route.params.bookedToggle
 
   return {
     title: date,
@@ -72,7 +89,7 @@ PostScreen.navigationOptions = ({ route }) => {
         <Item
           title="star"
           iconName={booked ? "star" : "staro"}
-          onPress={() => console.log("hui")}
+          onPress={() => bookedToggle()}
         />
       </HeaderButtons>
     )
