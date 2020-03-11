@@ -1,5 +1,5 @@
 import { DATA } from "../../../assets/data";
-import { LOAD_POSTS, BOOKED_POST, DELETE_POST } from "../types";
+import { LOAD_POSTS, BOOKED_POST, DELETE_POST, ADD_POST } from "../types";
 
 export const loadPosts = () => {
   return {
@@ -21,3 +21,12 @@ export const deletePost = id => {
     payload: id
   };
 };
+
+export const addPost = post => {
+  post.id = Date.now().toLocaleString()
+
+  return {
+    type: ADD_POST,
+    payload: post
+  }
+}
