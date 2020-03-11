@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import {
   ScrollView,
   TextInput,
-  Image,
   Button,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -14,12 +13,12 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { addPost } from "../store/actions/post";
+import { PhotoPicker } from "../components/PhotoPicker";
 
 export const CreateScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [postText, setPostText] = useState("");
-  const img =
-    "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg";
+  const [img, setImg] = useState(null)
 
   const onChangeText = text => {
     setPostText(text);
@@ -48,13 +47,8 @@ export const CreateScreen = ({ navigation }) => {
             multiline
             placeholder="Введите текст поста"
           />
-          <Image
-            style={styles.image}
-            source={{
-              uri: img
-            }}
-          />
-          <Button title="Создать" onPress={() => addPostHandler()} />
+          <PhotoPicker setPhoto={setImg}/>
+          <Button title="Создать" onPress={() => addPostHandler()} disabled={!postText || !img}/>
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
