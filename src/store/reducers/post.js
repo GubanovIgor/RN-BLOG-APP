@@ -23,6 +23,12 @@ export const postReducer = (state = initialState, action) => {
         allPosts,
         bookedPosts: allPosts.filter(p => p.booked)
       };
+    case "DELETE_POST":
+      return {
+        ...state,
+        allPosts: state.allPosts.filter(post => post.id !== action.payload),
+        bookedPosts: state.bookedPosts.filter(post => post.id !== action.payload)
+      }
     default:
       return state;
   }

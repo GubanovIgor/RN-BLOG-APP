@@ -13,14 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { THEME } from "../theme";
-import { DATA } from "../../assets/data";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
-import { bookedPost } from "../store/actions/post";
+import { bookedPost, deletePost } from "../store/actions/post";
 
 export const PostScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const postId = route.params.postId;
-  const post = DATA.find(p => p.id === postId);
+  const post = useSelector(state => state.post.allPosts.find(post => post.id === postId))
 
   const bookedToggle = useCallback(() => {
     dispatch(bookedPost(postId));
@@ -28,7 +27,7 @@ export const PostScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setParams({ bookedToggle });
-  }, []);
+  }, [bookedToggle]);
 
   const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId))
 
@@ -48,12 +47,19 @@ export const PostScreen = ({ route, navigation }) => {
         {
           text: "Удалить",
           style: "destructive",
-          onPress: () => console.log("OK Pressed")
+          onPress: () => {
+            navigation.navigate("Main")
+            dispatch(deletePost(postId))
+          }
         }
       ],
       { cancelable: false }
     );
   };
+
+  if (!post) {
+    return null
+  }
 
   return (
     <ScrollView>
