@@ -1,10 +1,9 @@
-import { DATA } from "../../../assets/data";
 import { LOAD_POSTS, BOOKED_POST, DELETE_POST, ADD_POST } from "../types";
 
 export const loadPosts = () => {
   return {
     type: LOAD_POSTS,
-    payload: DATA
+    payload: []
   };
 };
 
