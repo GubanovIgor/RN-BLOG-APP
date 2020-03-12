@@ -12,22 +12,26 @@ export const loadPosts = () => {
   };
 };
 
-export const bookedPost = id => {
-  return {
+export const bookedPost = post => async dispatch => {
+  await DB.bookedPost(post)
+
+  dispatch({
     type: BOOKED_POST,
-    payload: id
-  };
+    payload: post.id
+  });
 };
 
-export const deletePost = id => {
-  return {
+export const deletePost = id => async dispatch => {
+  await DB.deletePost(id);
+
+  dispatch({
     type: DELETE_POST,
     payload: id
-  };
+  });
 };
 
 export const addPost = post => async dispatch => {
-  const id = await DB.createPost(post)
+  const id = await DB.createPost(post);
 
   const path = post.img.split("/").pop();
   const newPath = FileSystem.documentDirectory + path;
@@ -36,13 +40,13 @@ export const addPost = post => async dispatch => {
     FileSystem.moveAsync({
       from: post.img,
       to: newPath
-    })
+    });
   } catch (e) {
     console.log(e);
   }
 
   const payload = { ...post, img: newPath };
-  payload.id = id
+  payload.id = id;
 
   dispatch({
     type: ADD_POST,
