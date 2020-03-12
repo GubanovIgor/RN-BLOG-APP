@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import { DATA } from "../../assets/data";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { PostList } from "../components/PostList";
 import { loadPosts } from "../store/actions/post";
+import { THEME } from "../theme";
 
 export const MainScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -16,13 +17,22 @@ export const MainScreen = ({ navigation }) => {
     });
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPosts())
-  }, [dispatch])
+    dispatch(loadPosts());
+  }, [dispatch]);
 
-  const data = useSelector(state => state.post.allPosts)
+  const data = useSelector(state => state.post.allPosts);
+  const loading = useSelector(state => state.post.loading);
+
+  if (loading) {
+    return (
+      <View style={styles.loader}>
+        <ActivityIndicator color={THEME.MAIN_COLOR} size={30} />
+      </View>
+    );
+  }
 
   return <PostList data={data} onOpen={openPostHandler} />;
 };
@@ -50,3 +60,11 @@ MainScreen.navigationOptions = ({ navigation }) => {
     )
   };
 };
+
+const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});

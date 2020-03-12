@@ -1,6 +1,7 @@
 const initialState = {
   allPosts: [],
-  bookedPosts: []
+  bookedPosts: [],
+  loading: true
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         allPosts: action.payload,
-        bookedPosts: action.payload.filter(p => p.booked)
+        bookedPosts: action.payload.filter(p => p.booked),
+        loading: false
       };
     case "BOOKED_POST":
       const allPosts = state.allPosts.map(p => {
