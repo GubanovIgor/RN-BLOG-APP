@@ -5,6 +5,7 @@ import { PostNavigation } from "./PostNavigation";
 import { BookNavigation } from "./BookNavigation";
 import { THEME } from "../theme";
 import { TabBarIcon } from "../components/TabBarIcon";
+import { Platform } from "react-native";
 
 const BottomNavigator = createBottomTabNavigator();
 
@@ -26,11 +27,15 @@ export const BottomNavigation = () => {
 };
 
 const tabBarOptions = {
+  showLabel: false,
   style: {
-    backgroundColor: THEME.MAIN_COLOR
-  },
-  labelStyle: {
-    fontSize: 0
+    ...Platform.OS === 'android' ? {
+      backgroundColor: THEME.MAIN_COLOR
+    } : {
+      backgroundColor: '#fff',
+      borderTopWidth: 2,
+      borderTopColor: THEME.MAIN_COLOR
+    }
   }
 };
 

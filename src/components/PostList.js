@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, FlatList, Text, Image } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import {THEME} from '../theme'
 
 import { Post } from "./Post";
 
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     padding: 5
   },
   logo: {
-    color: '#c9c9c9',
+    color: THEME.PASSIVE_COLOR,
     marginBottom: 15
   },
   empty: {

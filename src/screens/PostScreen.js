@@ -6,7 +6,8 @@ import {
   ScrollView,
   StyleSheet,
   Button,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +20,9 @@ import { bookedPost, deletePost } from "../store/actions/post";
 export const PostScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const postId = route.params.postId;
-  const post = useSelector(state => state.post.allPosts.find(post => post.id === postId))
+  const post = useSelector(state =>
+    state.post.allPosts.find(post => post.id === postId)
+  );
 
   const bookedToggle = useCallback(() => {
     dispatch(bookedPost(post));
@@ -29,7 +32,9 @@ export const PostScreen = ({ route, navigation }) => {
     navigation.setParams({ bookedToggle });
   }, [bookedToggle]);
 
-  const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId))
+  const booked = useSelector(state =>
+    state.post.bookedPosts.some(post => post.id === postId)
+  );
 
   useEffect(() => {
     navigation.setParams({ booked });
@@ -48,8 +53,8 @@ export const PostScreen = ({ route, navigation }) => {
           text: "Удалить",
           style: "destructive",
           onPress: () => {
-            navigation.navigate("Main")
-            dispatch(deletePost(postId))
+            navigation.navigate("Main");
+            dispatch(deletePost(postId));
           }
         }
       ],
@@ -58,16 +63,16 @@ export const PostScreen = ({ route, navigation }) => {
   };
 
   if (!post) {
-    return null
+    return null;
   }
 
   return (
     <ScrollView>
       <Image style={styles.image} source={{ uri: post.img }} />
-      <View>
+      <View style={styles.textWrapper}>
         <Text>{post.text}</Text>
       </View>
-      <Button title="Удалить" style={styles.button} onPress={removeHandler} />
+      <Button title="Удалить" color={THEME.DANGER_COLOR} onPress={removeHandler} />
     </ScrollView>
   );
 };
@@ -77,8 +82,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200
   },
-  button: {
-    backgroundColor: THEME.DANGER_COLOR
+  textWrapper: {
+    paddingVertical: 20,
+    paddingHorizontal: 10
   }
 });
 
@@ -90,7 +96,7 @@ PostScreen.navigationOptions = ({ route }) => {
   return {
     title: date,
     headerStyle: {
-      backgroundColor: "#faac1b"
+      backgroundColor: THEME.ORANGE_COLOR
     },
     headerTintColor: "#fff",
     headerTitleStyle: {

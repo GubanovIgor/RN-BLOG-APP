@@ -14,6 +14,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { AppHeaderIcon } from "../components/AppHeaderIcon";
 import { addPost } from "../store/actions/post";
 import { PhotoPicker } from "../components/PhotoPicker";
+import { THEME } from "../theme";
 
 export const CreateScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export const CreateScreen = ({ navigation }) => {
             placeholder="Введите текст поста"
           />
           <PhotoPicker setPhoto={setImg}/>
-          <Button title="Создать" onPress={() => addPostHandler()} disabled={!postText || !img}/>
+          <Button title="Создать" color={THEME.MAIN_COLOR} onPress={() => addPostHandler()} disabled={!postText || !img}/>
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

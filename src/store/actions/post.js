@@ -13,7 +13,7 @@ export const loadPosts = () => {
 };
 
 export const bookedPost = post => async dispatch => {
-  await DB.bookedPost(post)
+  await DB.bookedPost(post);
 
   dispatch({
     type: BOOKED_POST,
@@ -31,8 +31,6 @@ export const deletePost = id => async dispatch => {
 };
 
 export const addPost = post => async dispatch => {
-  const id = await DB.createPost(post);
-
   const path = post.img.split("/").pop();
   const newPath = FileSystem.documentDirectory + path;
 
@@ -46,6 +44,8 @@ export const addPost = post => async dispatch => {
   }
 
   const payload = { ...post, img: newPath };
+  const id = await DB.createPost(payload);
+
   payload.id = id;
 
   dispatch({
